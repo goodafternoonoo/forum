@@ -4,8 +4,7 @@ declare global {
     var _mongo: Promise<MongoClient>;
 }
 
-const url =
-    'mongodb+srv://noonoo:wkwk12@forum.cj1jwy6.mongodb.net/forum?retryWrites=true&w=majority';
+const url = process.env.DB_URL!;
 
 let connectDB: Promise<MongoClient>;
 

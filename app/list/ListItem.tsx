@@ -16,38 +16,25 @@ export default function ListItem({ result }: { result: any[] }) {
                     <Link href={`/edit/${v._id}`}>✏️</Link>
                     <span
                         onClick={(e) => {
-                            // fetch(`api/post/delete`, {
-                            //     method: 'DELETE',
-                            //     body: v._id,
-                            // })
-                            //     .then((r) => r.json())
-                            //     .then((result) => {
-                            //         (
-                            //             e.target as HTMLSpanElement
-                            //         ).parentElement!.style.opacity = '0';
-                            //         setTimeout(() => {
-                            //             (
-                            //                 e.target as HTMLSpanElement
-                            //             ).parentElement!.style.display =
-                            //                 'none';
-                            //         }, 1000);
-                            //     })
-                            //     .catch((error) => {
-                            //         console.log(error);
-                            //     });
-                            fetch(`api/post/delete/${v._id}`, {
+                            fetch(`api/post/delete`, {
                                 method: 'DELETE',
+                                body: v._id,
                             })
-                                .then((r) => r.json())
+                                .then((r) => {
+                                    if (r.status === 200) return r.json();
+                                })
                                 .then((result) => {
-                                    (
-                                        e.target as HTMLSpanElement
-                                    ).parentElement!.style.opacity = '0';
-                                    setTimeout(() => {
+                                    if (result) {
                                         (
                                             e.target as HTMLSpanElement
-                                        ).parentElement!.style.display = 'none';
-                                    }, 1000);
+                                        ).parentElement!.style.opacity = '0';
+                                        setTimeout(() => {
+                                            (
+                                                e.target as HTMLSpanElement
+                                            ).parentElement!.style.display =
+                                                'none';
+                                        }, 1000);
+                                    }
                                 })
                                 .catch((error) => {
                                     console.log(error);
